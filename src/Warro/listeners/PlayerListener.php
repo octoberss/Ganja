@@ -107,7 +107,7 @@ class PlayerListener implements Listener
 			return;
 		}
 
-		$session = Base::getInstance()->sessionManager->getSession($player);
+		$session = $this->plugin->sessionManager->getSession($player);
 
 		if ($session === null) {
 			return;
@@ -132,7 +132,7 @@ class PlayerListener implements Listener
 		$event->setFormat($format);
 
 		$cooldown = Server::getInstance()->isOp($player->getName()) ? 0 : 3;
-		if (isset(Base::getInstance()->utils->chatCooldown[$player->getName()]) and time() - Base::getInstance()->utils->chatCooldown[$player->getName()] < $cooldown) {
+		if (isset($this->plugin->utils->chatCooldown[$player->getName()]) and time() - $this->plugin->utils->chatCooldown[$player->getName()] < $cooldown) {
 			$player->sendMessage(TextFormat::RED . 'Please wait before chatting again.');
 			$event->cancel();
 			return;
@@ -148,7 +148,7 @@ class PlayerListener implements Listener
 			}
 		}
 
-		Base::getInstance()->utils->chatCooldown[$player->getName()] = time();
+		$this->plugin->utils->chatCooldown[$player->getName()] = time();
 	}
 
 	/**
@@ -166,7 +166,7 @@ class PlayerListener implements Listener
 		$name = $item->getCustomName();
 
 		if ($name === TextFormat::RESET . TextFormat::DARK_GREEN . 'Arenas') {
-			Base::getInstance()->forms->freeForAll($player);
+			$this->plugin->forms->freeForAll($player);
 		}
 	}
 
@@ -206,7 +206,7 @@ class PlayerListener implements Listener
 			return;
 		}
 
-		$session = Base::getInstance()->sessionManager->getSession($player);
+		$session = $this->plugin->sessionManager->getSession($player);
 
 		if ($session === null) {
 			return;
@@ -215,7 +215,7 @@ class PlayerListener implements Listener
 		if ($session->hasDamager()) {
 			$damager = Server::getInstance()->getPlayerExact($session->getDamager());
 			if ($damager instanceof User) {
-				Base::getInstance()->utils->onDeath($player, $damager);
+				$this->plugin->utils->onDeath($player, $damager);
 			}
 		}
 	}
@@ -248,7 +248,7 @@ class PlayerListener implements Listener
 			return;
 		}
 
-		$session = Base::getInstance()->sessionManager->getSession($player);
+		$session = $this->plugin->sessionManager->getSession($player);
 
 		if ($session === null) {
 			return;
@@ -276,13 +276,13 @@ class PlayerListener implements Listener
 					$this->plugin->utils->setTagged($players, true, true);
 				}
 
-				$sessionDamager = Base::getInstance()->sessionManager->getSession($damager);
+				$sessionDamager = $this->plugin->sessionManager->getSession($damager);
 				$session->setDamager($damager->getName());
 				$session->setLastDamagePosition($damager->getPosition());
 				$sessionDamager->setDamager($player->getName());
 			}
 
-			Base::getInstance()->utils->doDamageCheck($player, $event);
+			$this->plugin->utils->doDamageCheck($player, $event);
 		} elseif ($event instanceof EntityDamageByChildEntityEvent) {
 			$damager = $event->getChild();
 			$owner = $damager->getOwningEntity();
@@ -294,18 +294,18 @@ class PlayerListener implements Listener
 					}
 				}
 
-				$sessionOwner = Base::getInstance()->sessionManager->getSession($owner);
+				$sessionOwner = $this->plugin->sessionManager->getSession($owner);
 
 				if (!$event->isCancelled()) {
 					foreach ([$player, $owner] as $players) {
-						Base::getInstance()->utils->setTagged($players, true, true);
+						$this->plugin->utils->setTagged($players, true, true);
 					}
 					$session->setDamager($owner->getName());
 					$sessionOwner->setDamager($player->getName());
 				}
 			}
 
-			Base::getInstance()->utils->doDamageCheck($player, $event);
+			$this->plugin->utils->doDamageCheck($player, $event);
 		} elseif ($event instanceof EntityDamageByBlockEvent) {
 			$damager = $event->getDamager();
 			if ($damager instanceof Cactus) {
@@ -313,7 +313,7 @@ class PlayerListener implements Listener
 				return;
 			}
 		} else {
-			Base::getInstance()->utils->doDamageCheck($player, $event);
+			$this->plugin->utils->doDamageCheck($player, $event);
 		}
 	}
 
