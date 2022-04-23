@@ -16,6 +16,8 @@ Gameplay on Ganja can be watched [here](https://www.youtube.com/watch?v=Puq4Hpen
 ![image](https://user-images.githubusercontent.com/67123872/164608821-5c781f28-a44b-4e82-8802-a01759609fac.png)
 5. Be sure to modify this line in `Base.php` inside of `onEnable()`.
 ![image](https://user-images.githubusercontent.com/67123872/164608909-6e05c9bf-c297-4ecc-a4e6-83f92b861c0c.png)
+6. Lastly, be sure to open `Variables.php` and modify the constant values to your needs.
+![image](https://user-images.githubusercontent.com/67123872/164914721-8f7abe6a-9b69-47ff-8dd2-ec8929c80921.png)
 
 Join my discord with **discord.gg/vasar**!
 
