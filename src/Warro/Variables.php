@@ -18,8 +18,8 @@ interface Variables
 
 	public const NAME = 'Ganja';
 	public const DISCORD = 'discord.gg/vasar';
-	public const SPAWN = 'world'; // This is your Spawn World, players will originate here
-	public const NODEBUFF_FFA_ARENA = 'your ffa world name'; // This is your FFA World, players will teleport here to PvP
+	public const SPAWN = 'your spawn world name goes right here'; // This is your Spawn World, players will originate here
+	public const NODEBUFF_FFA_ARENA = 'your ffa world name goes right here'; // This is your FFA World, players will teleport here to PvP
 
 	public const COMBAT_TAG = 20;
 	public const COMBAT_TAG_KILL = 5;
